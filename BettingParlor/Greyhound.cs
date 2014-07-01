@@ -31,12 +31,19 @@ namespace BettingParlor
         /// </summary>
         public Random Randomizer;
 
+        /// <summary>
+        ///  Faz o cão correr.
+        /// </summary>
+        /// <returns>Retorna true se o cão ganhar.</returns>
         public bool Run()
         {
             int distance = Randomizer.Next(1, 4);
-            SetPictureBoxPosition(distance);
+            Point p = MyPictureBox.Location;
+            p.X += distance;
+            Location = p.X;
+            MyPictureBox.Location = p;
 
-            return distance >= RacetrackLength;
+            return Location >= RacetrackLength;
         }
 
         /// <summary>
@@ -44,13 +51,9 @@ namespace BettingParlor
         /// </summary>
         public void TakeStartingPosition()
         {
-            SetPictureBoxPosition(StartingPosition);
-        }
-
-        private void SetPictureBoxPosition(int distance)
-        {
             Point p = MyPictureBox.Location;
-            p.X = distance;
+            p.X = StartingPosition;
+            Location = 0;
             MyPictureBox.Location = p;
         }
 
